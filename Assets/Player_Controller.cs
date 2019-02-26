@@ -40,7 +40,7 @@ public class Player_Controller : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == ("Floor") && grounded == false)
+        if (collision.gameObject.tag == ("GroundFloorTile") && grounded == false)
         {
             grounded = true;
         }
