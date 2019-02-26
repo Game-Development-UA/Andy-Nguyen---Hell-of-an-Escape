@@ -9,8 +9,9 @@ public class Player_Controller : MonoBehaviour
     public float playerSpeed;
     public float jumpPower;
     ///private int health = 1;
-    float horizontal;
+    private float xInput;
     bool grounded;
+    public float runThreshold;
 
     void Start()
     {
@@ -19,8 +20,20 @@ public class Player_Controller : MonoBehaviour
 
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        player.velocity = new Vector2(horizontal * playerSpeed, player.velocity.y);
+        xInput = Input.GetAxis("Horizontal");
+        player.velocity = new Vector2(xInput * playerSpeed, player.velocity.y);
+
+        ///Animator.SetBool("Running", Mathf.Abs(player.velocity.x) > runThreshold);
+
+        if( player.velocity.x > runThreshold )
+        {
+            player.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        }
+        
+        if( player.velocity.x < runThreshold )
+        {
+            player.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        }
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && grounded)
         {
@@ -28,11 +41,11 @@ public class Player_Controller : MonoBehaviour
             grounded = false;
         }
 
-        if (horizontal < 0)
+        if (xInput < 0)
         {
             transform.right = new Vector3(-1f, 0f, 0f);
         }
-        else if (horizontal > 0)
+        else if (xInput > 0)
         {
             transform.right = new Vector3(1f, 0f, 0f);
         }
