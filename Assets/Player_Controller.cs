@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
+
 
 public class Player_Controller : MonoBehaviour
 {
@@ -12,50 +14,44 @@ public class Player_Controller : MonoBehaviour
     private float xInput;
     bool grounded;
     public float runThreshold;
-
-    void Start()
-    {
-        grounded = false;
-    }
+    public float jumpThreshold;
+    public Animator Animation;
 
     void Update()
     {
         xInput = Input.GetAxis("Horizontal");
+        if (Input.GetButtonDown("Jump"))
+        {
+            Jump();
+            Animation.SetBool("Jump", true);
+        }
+
         player.velocity = new Vector2(xInput * playerSpeed, player.velocity.y);
 
-        ///Animator.SetBool("Running", Mathf.Abs(player.velocity.x) > runThreshold);
+        Animation.SetBool("Move", Mathf.Abs(player.velocity.x) > runThreshold);
 
-        if( player.velocity.x > runThreshold )
-        {
-            player.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-        }
-        
-        if( player.velocity.x < runThreshold )
+        if (xInput > 0f)
         {
             player.transform.eulerAngles = new Vector3(0f, 0f, 0f);
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && grounded)
+        if (xInput < 0f)
         {
-            player.AddForce(new Vector2(0f, jumpPower), ForceMode2D.Impulse);
-            grounded = false;
+            player.transform.eulerAngles = new Vector3(0f, 180f, 0f);
         }
-
-        if (xInput < 0)
+        if (player.velocity.y < -jumpThreshold)
         {
-            transform.right = new Vector3(-1f, 0f, 0f);
-        }
-        else if (xInput > 0)
-        {
-            transform.right = new Vector3(1f, 0f, 0f);
+            Animation.SetBool("Jump", false);
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void FixedUpdate()
     {
-        if (collision.gameObject.tag == ("GroundFloorTile") && grounded == false)
-        {
-            grounded = true;
-        }
+        player.velocity = new Vector2(xInput * playerSpeed, player.velocity.y);
+    }
+
+    void Jump()
+    {
+        player.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
 }
