@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class player_respawn : MonoBehaviour
 {
-    private Transform spawnPoint;
+    public Transform spawnPoint;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
