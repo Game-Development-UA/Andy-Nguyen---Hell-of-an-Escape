@@ -10,12 +10,17 @@ public class Player_Controller : MonoBehaviour
     public Rigidbody2D player;
     public float playerSpeed;
     public float jumpPower;
-    ///private int health = 1;
     private float xInput;
     bool grounded;
     public float runThreshold;
     public float jumpThreshold;
     public Animator Animation;
+    public Transform player_spawn;
+
+    void Start()
+    {
+        player.transform.position = player_spawn;
+    }
 
     void Update()
     {
@@ -54,4 +59,19 @@ public class Player_Controller : MonoBehaviour
     {
         player.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
+
+    public void Respawn()
+    {
+        this.transform.position = player_spawn;
+    }
+    /*
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == ("Spike"))
+        {
+            player.transform.position = player_spawn.transform.position;
+        }
+
+    }
+    */
 }
