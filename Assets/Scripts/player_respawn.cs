@@ -8,9 +8,9 @@ public class player_respawn : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == ("Spike"))
+        if (collision.transform.CompareTag("Player"))
         {
-            collision.transform.position = spawnPoint.transform.position;
+            collision.transform.position = spawnPoint.position;
         }
 
     }
