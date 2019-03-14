@@ -6,28 +6,43 @@ using UnityEngine.UI;
 public class RevisedTimer : MonoBehaviour
 {
     [SerializeField] private GameObject DefeatUI;
+    [SerializeField] private bool isPaused;
 
-    public bool timesUp = false;
+    //public bool timesUp = false;
     public Text timeText;
-    private float cur_time = 99;
+    private float cur_time = 5;
     private float elapsedTime;
 
     void Start()
     {
-        float elapsedTime = 0;
     }
 
-    void Update()
+    private void Update()
     {
-        elapsedTime += Time.deltaTime;
-        timeText.text = ((cur_time - elapsedTime).ToString("TIME: 00"));
-
-        if (elapsedTime >= 99)
-        {
-            timesUp = true;
-            DefeatUI.SetActive(true);
-            elapsedTime = 0;
+        while (cur_time - elapsedTime > 0) {
+            timeText.text = ((cur_time - elapsedTime).ToString("TIME: 00"));
+            elapsedTime += Time.deltaTime;
         }
 
+        if (cur_time - elapsedTime <= 0)
+        {
+            DefeatMenu();
+        }
+
+        /*elapsedTime >= 99
+        if (cur_time - elapsedTime <= (float)0)
+        {
+            isPaused = !isPaused;
+        }
+
+      
+        */
+    }
+
+    void DefeatMenu()
+    {
+        Time.timeScale = 0;
+        AudioListener.pause = true;
+        DefeatUI.SetActive(true);
     }
 }
