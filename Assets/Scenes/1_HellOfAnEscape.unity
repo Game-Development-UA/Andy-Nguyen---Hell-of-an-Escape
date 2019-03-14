@@ -6822,7 +6822,7 @@ MonoBehaviour:
   playerSpeed: 5
   jumpPower: 5
   runThreshold: 0
-  jumpThreshold: 5
+  jumpThreshold: 1
   Animation: {fileID: 619474601}
 --- !u!1 &713133951
 GameObject:
