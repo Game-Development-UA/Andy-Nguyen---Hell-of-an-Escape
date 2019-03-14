@@ -8,7 +8,7 @@ public class RevisedTimer : MonoBehaviour
     [SerializeField] private GameObject DefeatUI;
 
     public Text timeText;
-    private float cur_time = 5;
+    private float cur_time = 99;
     private float elapsedTime = 0;
 
     private void Update()
