@@ -10,33 +10,21 @@ public class RevisedTimer : MonoBehaviour
 
     //public bool timesUp = false;
     public Text timeText;
-    private float cur_time = 5;
-    private float elapsedTime;
-
-    void Start()
-    {
-    }
+    private float cur_time = 99;
+    private float elapsedTime = 0;
 
     private void Update()
     {
-        while (cur_time - elapsedTime > 0) {
+        if ((cur_time - elapsedTime) > 0)
+        {
             timeText.text = ((cur_time - elapsedTime).ToString("TIME: 00"));
             elapsedTime += Time.deltaTime;
         }
 
-        if (cur_time - elapsedTime <= 0)
+        else
         {
             DefeatMenu();
         }
-
-        /*elapsedTime >= 99
-        if (cur_time - elapsedTime <= (float)0)
-        {
-            isPaused = !isPaused;
-        }
-
-      
-        */
     }
 
     void DefeatMenu()
