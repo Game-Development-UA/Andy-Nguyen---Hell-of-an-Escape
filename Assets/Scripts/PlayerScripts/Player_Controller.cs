@@ -15,11 +15,10 @@ public class Player_Controller : MonoBehaviour
     public float runThreshold;
     public float jumpThreshold;
     public Animator Animation;
-    //public GameObject player_respawn;
 
     void Start()
     {
-        //player.transform.position = player_spawn;
+
     }
 
     void Update()
@@ -59,11 +58,5 @@ public class Player_Controller : MonoBehaviour
     {
         player.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
-
-    /*public void Respawn()
-    {
-        this.transform.position = player_spawn;
-    }
-    */
  
 }
