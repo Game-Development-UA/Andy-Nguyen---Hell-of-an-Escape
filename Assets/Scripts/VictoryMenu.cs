@@ -14,15 +14,22 @@ public class VictoryMenu : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             GoalReached = true;
-            VictoryUI.SetActive(true);
         }
 
+    }
+    void VictoryScreen()
+    {
+        VictoryUI.SetActive(true);
+        Time.timeScale = 0;
+        AudioListener.pause = true;
     }
 
     void Update()
     {
-        if (GoalReached = true) ;
-        Time.timeScale = 0;
-        AudioListener.pause = true;
+        if (GoalReached == true)
+        {
+            VictoryScreen();
+        }
+
     }
 }
